@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'domain/local/preferences/local_storage.dart';
 import 'domain/local/preferences/storage_controller.dart';
 import 'domain/server/http_client/request_handler.dart';
+import 'features/table/controller/table_controller.dart';
 
 final locator = GetIt.instance;
 
@@ -17,6 +18,7 @@ Future<void> init(LocalStorage localStorage) async {
   locator.registerLazySingleton<StorageController>(() => StorageController(prefs: prefs));
 
   // ==# Register GetIt services within GetX for further access
+  Get.lazyPut(() => TableController(), fenix: true);
 
   Get.lazyPut(() => locator<RequestHandler>(), fenix: true);
   Get.lazyPut(() => locator<StorageController>(), fenix: true);
